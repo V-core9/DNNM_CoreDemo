@@ -7,17 +7,35 @@ services:
     restart: unless-stopped
     command: sh -c "npm install && npm run start"
     ports:
-      - ${PORT}:${INNER_PORT}
+      - ${APP_PORT}:${APP_DOCKER_PORT}
     working_dir: /app
     volumes:
       - ./app/:/app
     environment:
-      NODE_DOCKER_PORT: ${INNER_PORT}
+      APP_DOCKER_PORT: ${APP_DOCKER_PORT}
     depends_on:
       - mysql
-    mem_limit: 1024m
-    mem_reservation: 256M
-    cpus: 4
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 1
+
+  api:
+    container_name: ${PROJECT_NAME}_api
+    image: node:17-alpine
+    restart: unless-stopped
+    command: sh -c "npm install && npm run start"
+    ports:
+      - ${API_PORT}:${API_DOCKER_PORT}
+    working_dir: /api
+    volumes:
+      - ./api/:/api
+    environment:
+      API_DOCKER_PORT: ${API_DOCKER_PORT}
+    depends_on:
+      - mysql
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 1
 
   mysql:
     image: mysql:5.7
@@ -28,6 +46,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: v_core9
       MYSQL_DATABASE: v_core9
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 2
 
 volumes:
   v9-mysql-data:

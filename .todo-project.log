@@ -1,0 +1,8 @@
+1.3.2022. @ 2:12 AM
+
+    1. Started this tracking of progress with a file to see where it takes me.
+    2. Created Docker containers for Application and MySql server.
+    3. Added .jshintrc file to root to get picked by the code editor and mark less things as errors.
+    4. .gitingore created with only node_modules folder ignored for now.
+
+    

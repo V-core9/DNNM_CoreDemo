@@ -15,11 +15,11 @@ app.use(express.urlencoded({ extended: true }));  // parse requests of content-t
 
 
 app.get("/", async (req, res) => {
-    return res.end("Welcome to application.");
+    return res.end("Welcome to V9_Application.");
 });
 
 // set port, listen for requests
-const PORT = process.env.NODE_DOCKER_PORT || 3000;
+const PORT = process.env.APP_DOCKER_PORT || 3000;
 app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}.`);
 });
