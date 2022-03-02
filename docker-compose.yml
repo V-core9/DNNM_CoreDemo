@@ -41,14 +41,16 @@ services:
     image: mysql:5.7
     container_name: ${PROJECT_NAME}_mysql
     restart: unless-stopped
-    volumes:
-      - v9-mysql-data:/var/lib/mysql
+    volumes: 
+        - ./db_init:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_ROOT_PASSWORD: v_core9
-      MYSQL_DATABASE: v_core9
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     mem_limit: 512m
     mem_reservation: 128M
     cpus: 2
 
 volumes:
-  v9-mysql-data:
+  mysql:
